@@ -16,4 +16,11 @@ class CountryController extends Controller
     {
         return response()->json(Country::find($id), 200);
     }
+
+    public function countryCreate(Request $request)
+    {
+        $country = Country::create($request->all());
+
+        return response()->json($country, 201);
+    }
 }
