@@ -23,4 +23,10 @@ class CountryController extends Controller
 
         return response()->json($country, 201);
     }
+
+    public function countryEdit(Request $request, Country $country)
+    {
+        $country->update($request->all());
+        return response()->json($country, 200);
+    }
 }

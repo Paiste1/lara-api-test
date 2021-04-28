@@ -26,3 +26,6 @@ Route::get('country/{id}', 'App\Http\Controllers\CountryController@countryId');
 
 // добавление записи
 Route::post('country', 'App\Http\Controllers\CountryController@countryCreate');
+
+// редактирование записи
+Route::put('country/{country}', 'App\Http\Controllers\CountryController@countryEdit');
