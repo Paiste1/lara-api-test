@@ -18,4 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// вывод всех записей
 Route::get('country', 'App\Http\Controllers\CountryController@country');
+
+// вывод одной записи
+Route::get('country/{id}', 'App\Http\Controllers\CountryController@countryId');
