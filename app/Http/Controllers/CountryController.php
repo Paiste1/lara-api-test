@@ -14,7 +14,17 @@ class CountryController extends Controller
 
     public function countryId($id)
     {
-        return response()->json(Country::find($id), 200);
+        $country = Country::find($id);
+
+        if (empty($country)) {
+            return response()->json([
+                'error' => true,
+                'message' => 'Not found'
+            ], 404);
+        }
+
+        return response()->json($country, 200);
+
     }
 
     public function countryCreate(Request $request)
@@ -28,5 +38,11 @@ class CountryController extends Controller
     {
         $country->update($request->all());
         return response()->json($country, 200);
+    }
+
+    public function countryDelete(Request $request, Country $country)
+    {
+        $country->delete();
+        return response()->json('', 204);
     }
 }

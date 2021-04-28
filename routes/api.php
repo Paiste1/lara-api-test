@@ -29,3 +29,6 @@ Route::post('country', 'App\Http\Controllers\CountryController@countryCreate');
 
 // редактирование записи
 Route::put('country/{country}', 'App\Http\Controllers\CountryController@countryEdit');
+
+// удаление записи
+Route::delete('country/{country}', 'App\Http\Controllers\CountryController@countryDelete');
