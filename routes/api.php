@@ -24,17 +24,19 @@ Route::get('country', 'App\Http\Controllers\Api\CountryController@country');
 // вывод одной записи
 Route::get('country/{id}', 'App\Http\Controllers\Api\CountryController@countryId');
 
-// добавление записи
-Route::post('country', 'App\Http\Controllers\Api\CountryController@countryCreate');
-
-// редактирование записи
-Route::put('country/{id}', 'App\Http\Controllers\Api\CountryController@countryEdit');
-
-// удаление записи
-Route::delete('country/{id}', 'App\Http\Controllers\Api\CountryController@countryDelete');
-
 // авторизация
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
 
-// обновление токена авторизации
-Route::get('refresh', 'App\Http\Controllers\Api\LoginController@refresh');
+Route::group(['middleware' => ['jwt.verify']], function() {
+    // добавление записи
+    Route::post('country', 'App\Http\Controllers\Api\CountryController@countryCreate');
+
+    // редактирование записи
+    Route::put('country/{id}', 'App\Http\Controllers\Api\CountryController@countryEdit');
+
+    // удаление записи
+    Route::delete('country/{id}', 'App\Http\Controllers\Api\CountryController@countryDelete');
+
+    // обновление токена авторизации
+    Route::get('refresh', 'App\Http\Controllers\Api\LoginController@refresh');
+});
