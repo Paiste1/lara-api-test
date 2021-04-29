@@ -35,3 +35,6 @@ Route::delete('country/{id}', 'App\Http\Controllers\Api\CountryController@countr
 
 // авторизация
 Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
+
+// обновление токена авторизации
+Route::get('refresh', 'App\Http\Controllers\Api\LoginController@refresh');
