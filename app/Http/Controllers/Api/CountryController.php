@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Controller;
 use App\Models\Country;
 use Illuminate\Http\Request;
 
@@ -11,11 +12,29 @@ class CountryController extends Controller
 {
     public function country()
     {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 401);
+        }
+
         return response()->json(Country::get(), 200);
     }
 
     public function countryId($id)
     {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 401);
+        }
+
         $country = Country::find($id);
 
         if (empty($country)) {
@@ -31,6 +50,15 @@ class CountryController extends Controller
 
     public function countryCreate(Request $request)
     {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 401);
+        }
+
         $rules = [
             'alias' => 'required|min:2|max:3',
             'name' => 'required|min:3',
@@ -49,6 +77,15 @@ class CountryController extends Controller
 
     public function countryEdit(Request $request, $id)
     {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 401);
+        }
+
         $rules = [
             'alias' => 'required|min:2|max:3',
             'name' => 'required|min:3',
@@ -75,6 +112,15 @@ class CountryController extends Controller
 
     public function countryDelete(Request $request, $id)
     {
+        try {
+            $user = auth()->userOrFail();
+        } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
+            return response()->json([
+                'error' => true,
+                'message' => $e->getMessage()
+            ], 401);
+        }
+
         $country = Country::find($id);
 
         if (empty($country)) {
@@ -86,10 +132,5 @@ class CountryController extends Controller
 
         $country->delete();
         return response()->json('', 204);
-    }
-
-    public function check($country)
-    {
-
     }
 }

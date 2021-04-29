@@ -19,16 +19,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // вывод всех записей
-Route::get('country', 'App\Http\Controllers\CountryController@country');
+Route::get('country', 'App\Http\Controllers\Api\CountryController@country');
 
 // вывод одной записи
-Route::get('country/{id}', 'App\Http\Controllers\CountryController@countryId');
+Route::get('country/{id}', 'App\Http\Controllers\Api\CountryController@countryId');
 
 // добавление записи
-Route::post('country', 'App\Http\Controllers\CountryController@countryCreate');
+Route::post('country', 'App\Http\Controllers\Api\CountryController@countryCreate');
 
 // редактирование записи
-Route::put('country/{id}', 'App\Http\Controllers\CountryController@countryEdit');
+Route::put('country/{id}', 'App\Http\Controllers\Api\CountryController@countryEdit');
 
 // удаление записи
-Route::delete('country/{id}', 'App\Http\Controllers\CountryController@countryDelete');
+Route::delete('country/{id}', 'App\Http\Controllers\Api\CountryController@countryDelete');
+
+// авторизация
+Route::post('login', 'App\Http\Controllers\Api\LoginController@login');
